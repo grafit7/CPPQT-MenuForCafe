@@ -20,8 +20,11 @@ public:
     std::string name() const;
 
     void setMenu(MenuSection *menuSection);
+    MenuSection *menu() const;
 
     virtual void apply(AbstractMenuVisitor *visitor) = 0;
+
+    virtual void removeSubitem() = 0;
 
 private:
     std::string mName;

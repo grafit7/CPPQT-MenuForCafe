@@ -18,7 +18,10 @@ public:
 
     int size() const;
 
-    AbstractMenuItem *at(int index);
+    AbstractMenuItem *at(unsigned index);
+
+    void removeSubitem() override;
+    void deleteChild(AbstractMenuItem* child);
 
 private:
     std::vector<std::unique_ptr<AbstractMenuItem>> mSubItems;

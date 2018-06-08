@@ -2,12 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <memory>
 
 namespace Ui {
 class MainWindow;
 }
 
-class MenuSection;
+class AbstractMenuItem;
 
 class MainWindow : public QMainWindow
 {
@@ -17,13 +18,15 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-
 private:
     void initMenu();
-    void printMenu(MenuSection *menuSection);
+
+private slots:
+    void slotPrintMenu();
 
 private:
     Ui::MainWindow *ui;
+    std::unique_ptr<AbstractMenuItem> mRoot;
 };
 
 #endif // MAINWINDOW_H

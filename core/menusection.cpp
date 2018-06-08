@@ -1,6 +1,8 @@
 #include "menusection.h"
 #include "abstractmenuvisitor.h"
 
+#include <algorithm>
+
 MenuSection::MenuSection(const std::string &name)
     : AbstractMenuItem{name}
 {
@@ -31,12 +33,33 @@ int MenuSection::size() const
     return mSubItems.size();
 }
 
-AbstractMenuItem *MenuSection::at(int index)
+AbstractMenuItem *MenuSection::at(unsigned index)
 {
     AbstractMenuItem *returnValue = nullptr;
-    if (index >= 0 && index < mSubItems.size())
+    if (index < mSubItems.size())
     {
         returnValue = mSubItems.at(index).get();
     }
     return returnValue;
+}
+
+void MenuSection::removeSubitem()
+{
+    while(!mSubItems.empty())
+    {
+        mSubItems.back()->removeSubitem();
+    }
+    if(menu() != nullptr)
+    {
+        menu()->deleteChild(this);
+    }
+}
+
+void MenuSection::deleteChild(AbstractMenuItem *child)
+{
+    auto toDel = std::find_if(mSubItems.begin(), mSubItems.end(), [&](std::unique_ptr<AbstractMenuItem>& obj)
+    {
+        return obj.get() == child;
+    });
+    mSubItems.erase(toDel);
 }

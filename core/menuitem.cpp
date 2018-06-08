@@ -1,4 +1,5 @@
 #include "menuitem.h"
+#include "menusection.h"
 #include "abstractmenuvisitor.h"
 
 MenuItem::MenuItem(const std::string &name,
@@ -44,4 +45,9 @@ void MenuItem::apply(AbstractMenuVisitor *visitor)
     {
         visitor->visit(this);
     }
+}
+
+void MenuItem::removeSubitem()
+{
+    menu()->deleteChild(this);
 }

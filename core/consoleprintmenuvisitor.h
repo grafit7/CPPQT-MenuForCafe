@@ -6,6 +6,8 @@
 class ConsolePrintMenuVisitor : public AbstractMenuVisitor
 {
 public:
+    ConsolePrintMenuVisitor() : AbstractMenuVisitor()
+    {}
     void visit(MenuSection *menuSection) override;
     void visit(MenuItem *menuItem) override;
 };

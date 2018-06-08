@@ -24,6 +24,8 @@ public:
 
     void apply(AbstractMenuVisitor *visitor) override;
 
+    void removeSubitem() override;
+
 private:
     double mPrice;
     int mWeight;

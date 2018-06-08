@@ -2,21 +2,29 @@
 #include "ui_mainwindow.h"
 
 #include "core/consoleprintmenuvisitor.h"
+
+#include "texteditprintmenuvisitor.h"
+#include "menuiterator.h"
+
+#include "core/consoleprintmenuvisitor.h"
 #include "core/abstractmenuitem.h"
 #include "core/menusection.h"
 #include "core/menuitem.h"
 
 #include <iostream>
 #include <utility>
-#include <memory>
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    QMainWindow(parent)
+    ,ui(new Ui::MainWindow)
+    ,mRoot{nullptr}
 {
     ui->setupUi(this);
+
     connect(ui->actionExit_2, &QAction::triggered, this, &MainWindow::close);
+
     initMenu();
+    slotPrintMenu();
 }
 
 MainWindow::~MainWindow()
@@ -34,15 +42,20 @@ void MainWindow::initMenu()
     food->addItem(std::make_unique<MenuItem>("potatoFree", 0.0));
     food->addItem(std::make_unique<MenuItem>("borshch", 0.0));
 
-    MenuSection menu("MENU");
-    menu.addItem(std::move(drinks));
-    menu.addItem(std::move(food));
-
-    printMenu(&menu);
+    auto menu = std::make_unique<MenuSection>("MENU");
+    menu->addItem(std::move(drinks));
+    menu->addItem(std::move(food));
+    mRoot = std::move(menu);
 }
 
-void MainWindow::printMenu(MenuSection *menuSection)
+void MainWindow::slotPrintMenu()
 {
-    auto visitor = std::make_unique<ConsolePrintMenuVisitor>();
-    menuSection->apply(visitor.get());
+    TextEditPrintMenuVisitor visitor(ui->printTextEdit);
+
+    MenuIterator iterator(mRoot.get());
+    while(iterator.hasNext())
+    {
+        auto item =  iterator.next();
+        item->apply(&visitor);
+    }
 }

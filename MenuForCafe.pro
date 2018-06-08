@@ -6,10 +6,16 @@ include($$PWD/core/MenuForCafeCore.pri)
 
 SOURCES += \
     $$PWD/main.cpp \
-    $$PWD/mainwindow.cpp
+    $$PWD/mainwindow.cpp \
+    texteditprintmenuvisitor.cpp \
+    menuiterator.cpp \
+    helpervisitor.cpp
 
 HEADERS += \
-    $$PWD/mainwindow.h
+    $$PWD/mainwindow.h \
+    texteditprintmenuvisitor.h \
+    menuiterator.h \
+    helpervisitor.h
 
 FORMS += \
     $$PWD/mainwindow.ui

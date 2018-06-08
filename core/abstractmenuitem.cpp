@@ -29,3 +29,8 @@ void AbstractMenuItem::setMenu(MenuSection *menuSection)
         mMenuSection = menuSection;
     }
 }
+
+MenuSection *AbstractMenuItem::menu() const
+{
+    return mMenuSection;
+}
