@@ -33,6 +33,9 @@ void TextEditPrintMenuVisitor::visit(MenuItem *menuItem)
         {
             description.append(QString("::::%1::::").arg(menuItem->ingredients().at(i).c_str()));
         }
-        mPlainTextEdit->appendPlainText(description);
+        if (!description.contains("::::::::"))
+        {
+            mPlainTextEdit->appendPlainText(description);
+        }
     }
 }

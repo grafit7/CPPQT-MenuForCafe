@@ -17,6 +17,7 @@ public:
     AbstractMenuItem(const std::string &name);
     virtual ~AbstractMenuItem() = 0;
 
+    void setName(const std::string &name);
     std::string name() const;
 
     void setMenu(MenuSection *menuSection);

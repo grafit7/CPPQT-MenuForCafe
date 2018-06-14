@@ -7,9 +7,9 @@ MenuItem::MenuItem(const std::string &name,
                    const int weight,
                    std::vector<std::string> &ingredients)
     : AbstractMenuItem{name}
-    , mPrice{price}
-    , mWeight{weight}
-    , mIngredients{ingredients}
+    ,mPrice{price}
+    ,mWeight{weight}
+    ,mIngredients{ingredients}
 {
 
 }
@@ -19,7 +19,8 @@ MenuItem::~MenuItem() {}
 MenuItem::MenuItem(const std::string &name,
                    const double price)
     : AbstractMenuItem{name}
-    , mPrice{price}
+    ,mPrice{price}
+    ,mWeight{0}
 {
 
 }
@@ -50,4 +51,19 @@ void MenuItem::apply(AbstractMenuVisitor *visitor)
 void MenuItem::removeSubitem()
 {
     menu()->deleteChild(this);
+}
+
+void MenuItem::setPrice(double price)
+{
+    mPrice = price;
+}
+
+void MenuItem::setWeight(int weight)
+{
+    mWeight = weight;
+}
+
+void MenuItem::setIngredients(const std::vector<std::string> &ingredients)
+{
+    mIngredients = ingredients;
 }

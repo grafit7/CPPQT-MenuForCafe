@@ -10,13 +10,13 @@ class MenuSection : public AbstractMenuItem
 {
 public:
     MenuSection(const std::string &name);
-    virtual ~MenuSection();
+    virtual ~MenuSection() = default;
 
     void addItem(std::unique_ptr<AbstractMenuItem> item);
 
     void apply(AbstractMenuVisitor *visitor) override;
 
-    int size() const;
+    size_t size() const;
 
     AbstractMenuItem *at(unsigned index);
 

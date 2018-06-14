@@ -23,6 +23,12 @@ private:
 
 private slots:
     void slotPrintMenu();
+    void menuElementSelected();
+    void slotUpdateMenu();
+    void slotAddNewItem();
+    void slotItemChanged();
+    void slotSaveEditedItem();
+    void slotDeleteItem();
 
 private:
     Ui::MainWindow *ui;

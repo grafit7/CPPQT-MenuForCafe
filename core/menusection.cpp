@@ -6,17 +6,11 @@
 MenuSection::MenuSection(const std::string &name)
     : AbstractMenuItem{name}
 {
-
-}
-
-MenuSection::~MenuSection()
-{
-
 }
 
 void MenuSection::addItem(std::unique_ptr<AbstractMenuItem> item)
 {
-    setMenu(this);
+    item->setMenu(this);
     mSubItems.push_back(std::move(item));
 }
 
@@ -28,7 +22,7 @@ void MenuSection::apply(AbstractMenuVisitor *visitor)
     }
 }
 
-int MenuSection::size() const
+size_t MenuSection::size() const
 {
     return mSubItems.size();
 }
@@ -49,7 +43,7 @@ void MenuSection::removeSubitem()
     {
         mSubItems.back()->removeSubitem();
     }
-    if(menu() != nullptr)
+    if(menu())
     {
         menu()->deleteChild(this);
     }
@@ -57,9 +51,12 @@ void MenuSection::removeSubitem()
 
 void MenuSection::deleteChild(AbstractMenuItem *child)
 {
-    auto toDel = std::find_if(mSubItems.begin(), mSubItems.end(), [&](std::unique_ptr<AbstractMenuItem>& obj)
+    if (child)
     {
-        return obj.get() == child;
-    });
-    mSubItems.erase(toDel);
+        auto toDel = std::find_if(mSubItems.begin(), mSubItems.end(), [&child](std::unique_ptr<AbstractMenuItem>& obj)
+        {
+            return obj.get() == child;
+        });
+        mSubItems.erase(toDel);
+    }
 }

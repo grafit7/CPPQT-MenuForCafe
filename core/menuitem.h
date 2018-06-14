@@ -18,8 +18,13 @@ public:
 
     virtual ~MenuItem();
 
+    void setIngredients(const std::vector<std::string> &ingredients);
     std::vector<std::string> ingredients() const;
+
+    void setPrice(double price);
     double price() const;
+
+    void setWeight(int weight);
     int weight() const;
 
     void apply(AbstractMenuVisitor *visitor) override;

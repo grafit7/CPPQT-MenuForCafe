@@ -34,3 +34,8 @@ MenuSection *AbstractMenuItem::menu() const
 {
     return mMenuSection;
 }
+
+void AbstractMenuItem::setName(const std::string &name)
+{
+    mName = name;
+}

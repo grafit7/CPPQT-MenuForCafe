@@ -18,11 +18,14 @@
     <item row="0" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout" stretch="0,4,0,0">
+       <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout" stretch="20,1">
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="9,1">
+          <property name="spacing">
+           <number>6</number>
+          </property>
           <item>
-           <widget class="QComboBox" name="chooseComboBox"/>
+           <widget class="MenuComboBox" name="chooseMenuComboBox"/>
           </item>
           <item>
            <widget class="QPushButton" name="addButton">
@@ -43,17 +46,17 @@
          </layout>
         </item>
         <item>
-         <widget class="QWidget" name="widget" native="true"/>
+         <widget class="EditorDelegate" name="menuEditorDelegate" native="true"/>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="deletePushButton">
           <property name="text">
            <string>Delete</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="savePushButton">
           <property name="text">
            <string>Save</string>
           </property>
@@ -88,12 +91,13 @@
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="separator"/>
-    <addaction name="actionExit_2"/>
+    <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menu_Edit">
     <property name="title">
      <string>&amp;Edit</string>
     </property>
+    <addaction name="actionAdd"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
     <property name="title">
@@ -125,12 +129,25 @@
     <string>Exit</string>
    </property>
   </action>
-  <action name="actionExit_2">
+  <action name="actionAdd">
    <property name="text">
-    <string>Exit</string>
+    <string>&amp;Add</string>
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MenuComboBox</class>
+   <extends>QComboBox</extends>
+   <header>menucombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>EditorDelegate</class>
+   <extends>QWidget</extends>
+   <header>editordelegate.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

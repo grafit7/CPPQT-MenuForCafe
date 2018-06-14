@@ -15,10 +15,9 @@ MenuIterator::MenuIterator(AbstractMenuItem *menu)
             return;
         }
 
-        for (int index = 0; index < item->size(); ++index)
+        for (size_t index = 0; index < item->size(); ++index)
         {
             auto next = item->at(index);
-            std::cout << next->name() << std::endl;
             this->mItemsStack.push(next);
         }
     };
@@ -36,7 +35,6 @@ AbstractMenuItem *MenuIterator::next()
 {
     AbstractMenuItem *nextItem = mItemsStack.top();
     mItemsStack.pop();
-
     nextItem->apply(mChildrenVisitor.get());
     return nextItem;
 }
